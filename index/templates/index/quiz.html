@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/quiz.css' %}">
+    <script src="{% static 'js/quiz.js' %}"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="universal">
+
+    <div class="header">
+        <div class="title">
+            <h3>Title</h3>
+        </div>
+        <div class="timer-div">
+            <h4 class="timer" id="timecounter">Timer </h4><br><span id="timer-start"></span>
+        </div>
+    </div>
+    
+    {% for q in queryset %}
+    <div class="container">
+        <div class="forms" id="n1"> 
+            <div class="img-div">
+                <img src="{{q.ques.url}}" class="img" alt="">
+            </div>
+            <form method="post">
+                {% csrf_token %}
+                <input type="radio" name="answer" value="{{q.q_op1}}">{{q.q_op1}}
+                <input type="radio" name="answer" value="{{q.q_op2}}">{{q.q_op2}}
+                <input type="radio" name="answer" value="{{q.q_op3}}">{{q.q_op3}}
+                <input type="radio" name="answer" value="{{q.q_op4}}">{{q.q_op4}}
+        </div>
+
+        <div class="forms" >
+            <div class="img-div">
+                <img src="{{q.ques2.url}}" class="img" alt="">
+            </div>
+            <div class="inputs">
+                <input type="radio" name="answer2" value="{{q.q2_op1}}">{{q.q2_op1}}
+                <input type="radio" name="answer2" value="{{q.q2_op2}}">{{q.q2_op2}}
+                <input type="radio" name="answer2" value="{{q.q2_op3}}">{{q.q2_op3}}
+                <input type="radio" name="answer2" value="{{q.q2_op4}}">{{q.q2_op4}}
+        </div>
+        </div>
+
+        <div class="forms">
+            <div class="img-div">3
+                <img src="{{q.ques3.url}}" class="img" alt="">
+            </div>
+            <div class="inputs">
+                <input type="radio" name="answer3" value="{{q.q3_op1}}">{{q.q3_op1}}
+                <input type="radio" name="answer3" value="{{q.q3_op2}}">{{q.q3_op2}}
+                <input type="radio" name="answer3" value="{{q.q3_op3}}">{{q.q3_op3}}
+                <input type="radio" name="answer3" value="{{q.q3_op4}}">{{q.q3_op4}}
+        </div>
+        </div>
+
+        <div class="forms" >
+            <div class="img-div">
+                <img src="{{q.ques4.url}}" class="img" alt="">
+            </div>
+            <div class="inputs">
+                <input type="radio" name="answer4" value="{{q.q4_op1}}">{{q.q4_op1}}
+                <input type="radio" name="answer4" value="{{q.q4_op2}}">{{q.q4_op2}}
+                <input type="radio" name="answer4" value="{{q.q4_op3}}">{{q.q4_op3}}
+                <input type="radio" name="answer4" value="{{q.q4_op4}}">{{q.q4_op4}}
+        </div>
+        </div>
+
+        <div class="forms" >
+            <div class="img-div">
+                <img src="{{q.ques5.url}}" class="img" alt="">
+            </div>
+            <div class="inputs">
+                <input type="radio" name="answer5" value="{{q.q5_op1}}">{{q.q5_op1}}
+                <input type="radio" name="answer5" value="{{q.q5_op2}}">{{q.q5_op2}}
+                <input type="radio" name="answer5" value="{{q.q5_op3}}">{{q.q5_op3}}
+                <input type="radio" name="answer5" value="{{q.q5_op4}}">{{q.q5_op4}}
+        </div>
+        </div>
+
+        <div class="forms">
+            <div class="img-div">
+                <img src="{{q.ques6.url}}" class="img" alt="">
+            </div>
+            <div class="inputs">
+                <input type="radio" name="answer6" value="{{q.q6_op1}}">{{q.q6_op1}}
+                <input type="radio" name="answer6" value="{{q.q6_op2}}">{{q.q6_op2}}
+                <input type="radio" name="answer6" value="{{q.q6_op3}}">{{q.q6_op3}}
+                <input type="radio" name="answer6" value="{{q.q6_op4}}">{{q.q6_op4}}
+        </div>
+        </div>
+
+        <div class="forms">
+            <div class="img-div">
+                <img src="{{q.ques7.url}}" class="img" alt="">
+            </div>
+            <div class="inputs">
+                <input type="radio" name="answer7" value="{{q.q7_op1}}">{{q.q7_op1}}
+                <input type="radio" name="answer7" value="{{q.q7_op2}}">{{q.q7_op2}}
+                <input type="radio" name="answer7" value="{{q.q7_op3}}">{{q.q7_op3}}
+                <input type="radio" name="answer7" value="{{q.q7_op4}}">{{q.q7_op4}}
+        </div>
+        </div>
+
+        <div class="forms">
+            <div class="img-div">
+                <img src="{{q.ques8.url}}" class="img" alt="">
+            </div>
+            <div class="inputs">
+                <input type="radio" name="answer8" value="{{q.q8_op1}}">{{q.q8_op1}}
+                <input type="radio" name="answer8" value="{{q.q8_op2}}">{{q.q8_op2}}
+                <input type="radio" name="answer8" value="{{q.q8_op3}}">{{q.q8_op3}}
+                <input type="radio" name="answer8" value="{{q.q8_op4}}">{{q.q8_op4}}
+        </div>
+        </div>
+
+        <div class="forms">
+            <div class="img-div">
+                <img src="{{q.ques9.url}}" class="img" alt="">
+            </div>
+            <div class="inputs">
+                <input type="radio" name="answer9" value="{{q.q9_op1}}">{{q.q9_op1}}
+                <input type="radio" name="answer9" value="{{q.q9_op2}}">{{q.q9_op2}}
+                <input type="radio" name="answer9" value="{{q.q9_op3}}">{{q.q9_op3}}
+                <input type="radio" name="answer9" value="{{q.q9_op4}}">{{q.q9_op4}}
+        </div>
+        </div>
+
+        <div class="forms">
+            <div class="img-div">
+                <img src="{{q.ques10.url}}" class="img" alt="">
+            </div>
+            <div class="inputs">
+                <input type="radio" name="answer10" value="{{q.q10_op1}}">{{q.q10_op1}}
+                <input type="radio" name="answer10" value="{{q.q10_op2}}">{{q.q10_op2}}
+                <input type="radio" name="answer10" value="{{q.q10_op3}}">{{q.q10_op3}}
+                <input type="radio" name="answer10" value="{{q.q10_op4}}">{{q.q10_op4}}
+        </div>
+        </div>
+
+        <div class="forms">
+            <div class="img-div">
+                <img src="{{q.ques11.url}}" class="img" alt="">
+            </div>
+            <div class="inputs">
+                <input type="radio" name="answer11" value="{{q.q11_op1}}">{{q.q11_op1}}
+                <input type="radio" name="answer11" value="{{q.q11_op2}}">{{q.q11_op2}}
+                <input type="radio" name="answer11" value="{{q.q11_op3}}">{{q.q11_op3}}
+                <input type="radio" name="answer11" value="{{q.q11_op4}}">{{q.q11_op4}}
+        </div>
+        </div>
+
+        <div class="forms">
+            <div class="img-div">
+                <img src="{{q.ques12.url}}" class="img" alt="">
+            </div>
+            <div class="inputs">
+                <input type="radio" name="answer12" value="{{q.q12_op1}}">{{q.q12_op1}}
+                <input type="radio" name="answer12" value="{{q.q12_op2}}">{{q.q12_op2}}
+                <input type="radio" name="answer12" value="{{q.q12_op3}}">{{q.q12_op3}}
+                <input type="radio" name="answer12" value="{{q.q12_op4}}">{{q.q12_op4}}
+        </div>
+        </div>
+
+        <div class="forms">
+            <div class="img-div">
+                <img src="{{q.ques13.url}}" class="img" alt="">
+            </div>
+            <div class="inputs">
+                <input type="radio" name="answer13" value="{{q.q13_op1}}">{{q.q13_op1}}
+                <input type="radio" name="answer13" value="{{q.q13_op2}}">{{q.q13_op2}}
+                <input type="radio" name="answer13" value="{{q.q13_op3}}">{{q.q13_op3}}
+                <input type="radio" name="answer13" value="{{q.q13_op4}}">{{q.q13_op4}}
+        </div>
+        </div>
+
+        <div class="forms">
+            <div class="img-div">
+                <img src="{{q.ques14.url}}" class="img" alt="">
+            </div>
+            <div class="inputs">
+                <input type="radio" name="answer14" value="{{q.q14_op1}}">{{q.q14_op1}}
+                <input type="radio" name="answer14" value="{{q.q14_op2}}">{{q.q14_op2}}
+                <input type="radio" name="answer14" value="{{q.q14_op3}}">{{q.q14_op3}}
+                <input type="radio" name="answer14" value="{{q.q14_op4}}">{{q.q14_op4}}
+        </div>
+        </div>
+
+        <div class="forms">
+            <div class="img-div">
+                <img src="{{q.ques15.url}}" class="img" alt="">
+            </div>
+            <div class="inputs">
+                <input type="radio" name="answer15" value="{{q.q15_op1}}">{{q.q15_op1}}
+                <input type="radio" name="answer15" value="{{q.q15_op2}}">{{q.q15_op2}}
+                <input type="radio" name="answer15" value="{{q.q15_op3}}">{{q.q15_op3}}
+                <input type="radio" name="answer15" value="{{q.q15_op4}}">{{q.q15_op4}}
+        </div>
+        </div>
+
+        <div class="forms">
+            <div class="img-div">
+                <img src="{{q.ques16.url}}" class="img" alt="">
+            </div>
+            <div class="inputs">
+                <input type="radio" name="answer16" value="{{q.q16_op1}}">{{q.q16_op1}}
+                <input type="radio" name="answer16" value="{{q.q16_op2}}">{{q.q16_op2}}
+                <input type="radio" name="answer16" value="{{q.q16_op3}}">{{q.q16_op3}}
+                <input type="radio" name="answer16" value="{{q.q16_op4}}">{{q.q16_op4}}
+        </div>
+        </div>
+
+        <div class="forms">
+            <div class="img-div">
+                <img src="{{q.ques17.url}}" class="img" alt="">
+            </div>
+            <div class="inputs">
+                <input type="radio" name="answer17" value="{{q.q17_op1}}">{{q.q17_op1}}
+                <input type="radio" name="answer17" value="{{q.q17_op2}}">{{q.q17_op2}}
+                <input type="radio" name="answer17" value="{{q.q17_op3}}">{{q.q17_op3}}
+                <input type="radio" name="answer17" value="{{q.q17_op4}}">{{q.q17_op4}}
+        </div>
+        </div>
+
+        <div class="forms">
+            <div class="img-div">
+                <img src="{{q.ques18.url}}" class="img" alt="">
+            </div>
+            <div class="inputs">
+                <input type="radio" name="answer18" value="{{q.q18_op1}}">{{q.q18_op1}}
+                <input type="radio" name="answer18" value="{{q.q18_op2}}">{{q.q18_op2}}
+                <input type="radio" name="answer18" value="{{q.q18_op3}}">{{q.q18_op3}}
+                <input type="radio" name="answer18" value="{{q.q18_op4}}">{{q.q18_op4}}
+        </div>
+        </div>
+
+        <div class="forms">
+            <div class="img-div">
+                <img src="{{q.ques19.url}}" class="img" alt="">
+            </div>
+            <div class="inputs">
+                <input type="radio" name="answer19" value="{{q.q19_op1}}">{{q.q19_op1}}
+                <input type="radio" name="answer19" value="{{q.q19_op2}}">{{q.q19_op2}}
+                <input type="radio" name="answer19" value="{{q.q19_op3}}">{{q.q19_op3}}
+                <input type="radio" name="answer19" value="{{q.q19_op4}}">{{q.q19_op4}}
+        </div>
+        </div>
+
+        <div class="forms" id="n20">
+            <div class="img-div">
+                <img src="{{q.ques20.url}}" class="img" alt="">
+            </div>
+            <div class="inputs">
+                <input type="radio" name="answer20" value="{{q.q20_op1}}">{{q.q20_op1}}
+                <input type="radio" name="answer20" value="{{q.q20_op2}}">{{q.q20_op2}}
+                <input type="radio" name="answer20" value="{{q.q20_op3}}">{{q.q20_op3}}
+                <input type="radio" name="answer20" value="{{q.q20_op4}}">{{q.q20_op4}}
+              
+              </div> 
+        </div>
+        <button type="submit" class="btn-sub text-center">Submit</button>
+    </form>
+        {% endfor %}
+    </div>
+</div>
+</body>
+</html>

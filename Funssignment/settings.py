@@ -20,12 +20,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-#k1gd)32yznbsv!l7m#x2=e&sd14m9=3r-^g46wgj4^8ze(^d6'
+
+
+with open(os.path.join(BASE_DIR,'secret_key.txt')) as f:
+    SECRET_KEY= f.read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['www.funssignment.com','funssignment.com','127.0.0.1:8000']
 
 
 # Application definition
@@ -35,12 +38,17 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users.apps.UsersConfig',
     'index.apps.IndexConfig',
     'allauth',
+    "crispy_forms",
+    'crispy_tailwind',
 ]
+
+SITE_ID=1
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
@@ -126,14 +134,35 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS=[
-    os.path.join(BASE_DIR,'static')
-]
-
+STATIC_ROOT=os.path.join(BASE_DIR,'static')
+    
 MEDIA_URL='/Data/'
 MEDIA_ROOT=os.path.join(BASE_DIR,'Data')
- 
+
+TIME_ZONE = 'Asia/Kolkata'
+
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = True
+
+SECURE_HSTS_SECONDS = 31536000
+SECURE_HSTS_PRELOAD = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'funssignment.info@gmail.com'
+EMAIL_HOST_PASSWORD = 'Funssignment@212003'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
+CRISPY_TEMPLATE_PACK = "tailwind"
+
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+LOGIN_REDIRECT_URL='index:index'

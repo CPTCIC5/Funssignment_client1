@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %} Home-Funssignment {% endblock title %}
+{% block body %}
+
+<!-- component -->
+<div class="mt-6 bg-gray-50">
+    <div class=" px-10 py-6 mx-auto card-div">
+          
+          <!--author-->
+          {% for qset in queryset %}
+       <div class="max-w-2xl px-10 mx-auto bg-gray-50">
+          <a href="" class="block transition duration-200 ease-out transform">
+              {% if qset.thumbnail %}
+              <img class="w-full shadow-sm card-div" src="{{qset.thumbnail.url}}" alt="photo">
+              {% else %}
+                 {% if q2.subject == "Physics" %}
+                <img class="object-cover w-full shadow-sm h-full" src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80" alt="photo">
+                {% elif q2.subject == "Maths" %}
+                <img class="object-cover w-full shadow-sm h-full" src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80" alt="photo">
+                {% elif q2.subject == "Chemistry" %}
+                <img class="object-cover w-full shadow-sm h-full" src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80" alt="photo">
+                {% endif %}
+                {% endif %}
+          </a>
+
+          <div class="mt-2 flex flex-row justify-between align-center pl-4 pr-4">
+              <!--post heading-->
+              <a href=""
+                  class="sm:text-3xl md:text-3xl lg:text-3xl xl:text-4xl font-bold text-purple-500 ml-6 hover:underline">{{qset.title}}</a> 
+             {% if user.is_authenticated %}     
+             {% if qset.question %}<a href="{% url 'index:quiz' qset.question.id %}">  <button class="p-2 bg-blue-500 hover:bg-blue-600 rounded text-white w-full">Start</button></a>
+             {% else %} <button class="p-2 bg-blue-500 hover:bg-blue-600 rounded text-white w-full">Coming soon</button></a>
+             {% endif %}
+             {% else %}
+             <a href="{% url 'login'%}">  <button class="p-2 bg-blue-500 hover:bg-blue-600 rounded text-white w-full">Login</button></a>
+             {% endif %}
+                  <!--post views-->
+                  <!--author avator-->
+         </div>
+      
+         <!--end post header-->
+              <!--post content-->
+   <div class="max-w-4xl mx-auto text-2xl text-gray-700 text-left mt-4 ml-8 rounded bg-gray-100">
+
+       <!--content body-->
+       <div>
+        {% if qset2.desc %}<p class="mt-2">{{qset2.desc}}{% else %} No desc {% endif %}</p>
+       </div>
+          </div>
+      </div>
+      {% endfor %}
+      <!--related posts-->
+<h2 class="text-2xl mt-4 text-gray-500 font-bold text-center">Related Posts</h2>
+<div class="flex grid h-full grid-cols-12 gap-10 pb-10 mt-8 sm:mt-16">
+
+
+<div class="grid grid-cols-12 col-span-12 gap-7">
+    {% for post in post_query  %}
+
+  <div class="flex flex-col items-start col-span-12 overflow-hidden shadow-sm rounded-xl md:col-span-6 lg:col-span-4">
+      <a href="{% url 'index:paginated_quiz' post.title %}" class="transition duration-200 ease-out transform">
+          <img class="object-center w-full shadow-sm" src="{{post.thumbnail.url}}">
+      </a>
+      <div class="relative flex flex-col items-start px-6 bg-white border border-t-0 border-gray-200 w-full py-7">
+          <h2 class="text-center text-gray-500 font-bold sm:text-lg md:text-xl"><a href="{% url 'index:paginated_quiz' post.title %}">{{post.title}}</a></h2>
+      </div>
+  </div>
+    {% endfor %}
+</div>
+</div>
+</div>
+</div>
+{% endblock body %}

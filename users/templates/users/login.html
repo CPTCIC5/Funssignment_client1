@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %} Login {% endblock title %}
+{% block body %}
+{% load tailwind_filters %}
+
+    <div class="flex flex-col items-center pt-12 w-screen h-screen bg-gray-200 text-gray-700">
+        {% if messages %}
+        <div class="max-w-lg mx-auto">
+            <div class="flex bg-yellow-100 rounded-lg p-4 mb-4 text-sm text-yellow-700" role="alert">
+                <svg class="w-5 h-5 inline mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                <div>
+                    {% for msg in messages %}
+                    <span class="font-medium">Info! </span>{{msg}}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        <form class="flex flex-col bg-white rounded shadow-lg p-12" method="POST">
+          {% csrf_token %}
+          {{ form|crispy }}
+            <button class="flex items-center justify-center h-12 px-6 w-64 bg-blue-600 mt-8 rounded font-semibold text-sm text-blue-100 hover:bg-blue-700">Login</button>
+            <div class="flex mt-6 justify-center text-xs">
+            <a class="text-blue-400 hover:text-blue-500" href="{% url 'password_reset' %}">Forgot Password</a>
+                <span class="mx-2 text-grey-300">/</span>
+                <a class="text-blue-400 hover:text-blue-500" href="{% url 'users:register' %}">Sign Up</a>
+            </div>
+        </form>
+    </div>
+{% endblock body %}

@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import QuizPost,Question,Result
 
-# Register your models here.
+admin.site.register(QuizPost)
+admin.site.register(Question)
+admin.site.register(Result)

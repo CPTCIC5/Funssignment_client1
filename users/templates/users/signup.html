@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %} Register {% endblock title %}
+
+{% block body %}
+    <div class="flex flex-col items-center pt-5 w-screen h-screen bg-gray-200 text-gray-700">
+        {% if messages %}
+        <div class="max-w-lg mx-auto">
+            <div class="flex bg-yellow-100 rounded-lg p-4 mb-4 text-sm text-yellow-700" role="alert">
+                <svg class="w-5 h-5 inline mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                <div>
+                    {% for msg in messages %}
+                    <span class="font-medium">Info! </span> {{msg}}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        <form class="flex flex-col bg-white rounded shadow-lg p-12" method="POST">
+          {% csrf_token %}
+                <label class="font-semibold text-xs" for="username">Username</label>
+                <input class="flex items-center h-12 px-4 w-64 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2" type="text" name="username" >
+                <label class="font-semibold text-xs" for="usernameField">Email</label>
+                <input class="flex items-center h-12 px-4 w-64 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2"  type="email"  name="email" >
+           
+            <label class="font-semibold text-xs mt-3" for="password">Password</label>
+            <input class="flex items-center h-12 px-4 w-64 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2"type="password" name="password" >
+            <label class="font-semibold text-xs mt-3" for="confirm_password">Confirm Password</label>
+            <input class="flex items-center h-12 px-4 w-64 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2"type="password" name="confirm_password" >
+            <button class="flex items-center justify-center h-12 px-6 w-64 bg-blue-600 mt-8 rounded font-semibold text-sm text-blue-100 hover:bg-blue-700">Signup</button>
+            <div class="flex mt-6 justify-center text-xs">
+                <span class="mx-2 text-black-300">Already have an account? </span>
+                <a class="text-blue-400 hover:text-blue-500" href="{% url 'login' %}">Sign In</a>
+            </div>
+        </form>
+        <!-- Component End  -->
+    </div>
+{% endblock body %}

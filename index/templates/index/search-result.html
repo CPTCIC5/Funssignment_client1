@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %} Funssignment {% endblock title %}
+{% block body %}
+  <!-- component -->
+  <!-- component -->
+<!-- This is an example component -->
+  <h2 class="text-2xl mr-10 mt-4">Search result for:"{{searched}}"</h2>
+{% if messages %}
+{% for msg in messages %}
+<div class="px-4 py-3 leading-normal text-white bg-green-500 border" role="alert">
+    <p>{{msg}}</p>
+</div>
+{% endfor %}
+{% endif %}
+<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-4 py-12">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for q2 in qset2 %}
+        <div class="w-full bg-white rounded-lg sahdow-lg overflow-hidden flex flex-col justify-center items-center">
+            <a href="{% url 'index:paginated_quiz' q2.title %}">
+            <div class="card-div ">
+                {% if q2.thumbnail %}
+                <img class="w-full h-full" src="{{q2.thumbnail.url}}" alt="photo">
+                {% else %}
+                {% if q2.subject == "Physics" %}
+                <img class="object-center object-cover h-auto w-full" src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80" alt="photo">
+                {% elif q2.subject == "Maths" %}
+                <img class="object-center object-cover h-auto w-full" src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80" alt="photo">
+                {% elif q2.subject == "Chemistry" %}
+                <img class="object-center object-cover h-auto w-full" src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80" alt="photo">
+                {% endif %}
+                {% endif %}
+            </div>
+            <div class="text-center py-8 sm:py-6">
+                <p class="text-xl text-gray-700 font-bold mb-2">{{q2.title}}</p>
+                <p class="text-base text-gray-400 font-normal">{{q2.subject}}</p>
+            </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock body %}
+
+<!--<img class="object-center object-cover h-auto w-full" src="/Data/default_quiz.jpeg" alt="photo"-->
