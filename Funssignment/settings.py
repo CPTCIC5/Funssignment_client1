@@ -26,9 +26,9 @@ with open(os.path.join(BASE_DIR,'secret_key.txt')) as f:
     SECRET_KEY= f.read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['www.funssignment.com','funssignment.com','127.0.0.1:8000']
+ALLOWED_HOSTS = ['www.funssignment.com','funssignment.com','127.0.0.1']
 
 
 # Application definition
@@ -134,13 +134,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT=os.path.join(BASE_DIR,'static')
+STATICFILES_DIRS=[
+    os.path.join(BASE_DIR,'static')
+]
+#STATIC_ROOT=os.path.join(BASE_DIR,'static')
     
 MEDIA_URL='/Data/'
 MEDIA_ROOT=os.path.join(BASE_DIR,'Data')
 
 TIME_ZONE = 'Asia/Kolkata'
-
+'''
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 SECURE_SSL_REDIRECT = True
@@ -148,7 +151,7 @@ SECURE_SSL_REDIRECT = True
 SECURE_HSTS_SECONDS = 31536000
 SECURE_HSTS_PRELOAD = True
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-
+'''
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST = 'smtp.gmail.com'

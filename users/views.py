@@ -1,4 +1,4 @@
-from django.shortcuts import render,HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render,HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.urls import reverse
@@ -57,10 +57,12 @@ def profile(request):
 
 @login_required
 def profile_update(request):
-    queryset_update=Profile.objects.get(user=request.user)
+    #queryset_update=Profile.objects.get(user=request.user)
+    queryset_update=get_object_or_404(Profile,user=request.user)
     form = ProfileForm(request.POST or None, instance = queryset_update)
     if form.is_valid():
         form.save()
+        messages.success(request,'Updated!')
         return HttpResponseRedirect(reverse('users:profile'))
     return render(request,'index/profile_update.html',{'queryset_update':queryset_update,'form':form})
 

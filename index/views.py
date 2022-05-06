@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from .models import QuizPost,Question, Result
 from django.contrib.auth.decorators import login_required
-
+from django.contrib import messages
+from django.db.models import Q
 
 # Create your views here.
 
@@ -24,7 +25,8 @@ def search(request):
     if request.method=='POST':
         searched=request.POST.get('searched')
         print(searched)
-        qset2=QuizPost.objects.filter(title__icontains=searched)
+        #qset2=QuizPost.objects.filter(title__icontains=searched)
+        qset2=QuizPost.objects.filter(Q(title__icontains=searched) | Q(title__startswith=searched))
         return render(request,'index/search-result.html',{'qset2':qset2,'searched':searched})
     return render(request,'index/search-result.html')
 
@@ -33,7 +35,8 @@ def search(request):
 def quiz(request,post_id):
     queryset=Question.objects.filter(id=post_id)
     if request.method == 'POST':
-        queryset=Question.objects.get(id=post_id)
+        #queryset=Question.objects.get(id=post_id)
+        queryset=get_object_or_404(Question,id=post_id)
         answer=request.POST.get('answer')
         answer2=request.POST.get('answer2')
         answer3=request.POST.get('answer3')
@@ -55,192 +58,189 @@ def quiz(request,post_id):
         answer18=request.POST.get('answer18')
         answer19=request.POST.get('answer19')
         answer20=request.POST.get('answer20')
-        score=0
         correct=0
         wrong=0
         not_attempted=0
         if answer == queryset.answer:
-            score+=4
+            
             correct+=1
         elif answer is None or answer == "":
             not_attempted+=1
         else:
-            score-=1
+            
             wrong+=1
 
         if answer2 == queryset.answer2:
-            score+=4
+            
             correct+=1
         elif answer2 is None or answer2 == "":
             not_attempted+=1
         else:
-            score-=1
+            
             wrong+=1
 
         if answer3 == queryset.answer3:
-            score+=4
+            
             correct+=1
         elif answer3 is None or answer3 == "":
             not_attempted+=1
         else:
-            score-=1
+            
             wrong+=1
 
         if answer4 == queryset.answer4:
-            score+=4
+            
             correct+=1
         elif answer4 is None or answer4 == "":
             not_attempted+=1
         else:
-            score=1
             wrong+=1
 
         if answer5 == queryset.answer5:
-            score+=4
+            
             correct+=1
         elif answer5 is None or answer5 == "":
             not_attempted+=1
         else:
-            score-=1
+            
             wrong+=1
         
         if answer6 == queryset.answer6:
-            score+=4
+            
             correct+=1
         elif answer6 is None or answer6 == "":
             not_attempted+=1
         else:
-            score-=1
+            
             wrong+=1
         
         if answer7 == queryset.answer7:
-            score+=4
+            
             correct+=1
         elif answer7 is None or answer7 == "":
             not_attempted+=1
         else:
-            score-=1
+            
             wrong+=1
 
         if answer8 == queryset.answer8:
-            score+=4
+            
             correct+=1
         elif answer8 is None or answer8 == "":
             not_attempted+=1
         else:
-            score-=1
+            
             wrong+=1
     
         if answer9 == queryset.answer9:
-            score+=4
+            
             correct+=1
         elif answer9 is None or answer9 == "":
             not_attempted+=1
         else:
-            score-=1
+            
             wrong+=1
 
         if answer10 == queryset.answer10:
-            score+=4
+            
             correct+=1
         elif answer10 is None or answer10 == "":
             not_attempted+=1
         else:
-            score-=1
+            
             wrong+=1
         
         if answer11 == queryset.answer11:
-            score+=4
+            
             correct+=1
         elif answer11 is None or answer11 == "":
             not_attempted+=1
         else:
-            score-=1
+            
             wrong+=1
         
         if answer12 == queryset.answer12:
-            score+=4
+            
             correct+=1
         elif answer12 is None or answer12 == "":
             not_attempted+=1
         else:
-            score-=1
+            
             wrong+=1
 
         if answer13 == queryset.answer13:
-            score+=4
+            
             correct+=1
         elif answer13 is None or answer13 == "":
             not_attempted+=1
         else:
-            score-=1
+            
             wrong+=1
 
         if answer14 == queryset.answer15:
-            score+=4
+            
             correct+=1
         elif answer14 is None or answer14 == "":
             not_attempted+=1
         else:
-            score-=1
+            
             wrong+=1
 
         if answer15 == queryset.answer15:
-            score+=4
+            
             correct+=1
         elif answer15 is None or answer15 == "":
             not_attempted+=1
         else:
-            score-=1
+            
             wrong+=1
 
         if answer16 == queryset.answer16:
-            score+=4
+            
             correct+=1
         elif answer16 is None or answer16 == "":
             not_attempted+=1
         else:
-            score-=1
+            
             wrong+=1
 
         if answer17 == queryset.answer17:
-            score+=4
+            
             correct+=1
         elif answer17 is None or answer17 == "":
             not_attempted+=1
         else:
-            score-=1
+            
             wrong+=1
 
         if answer18 == queryset.answer18:
-            score+=4
+            
             correct+=1
         elif answer18 is None or answer18 == "":
             not_attempted+=1
         else:
-            score-=1
+            
             wrong+=1
 
         if answer19 == queryset.answer19:
-            score+=4
+            
             correct+=1
         elif answer19 is None or answer19 == "":
             not_attempted+=1
         else:
-            score-=1
             wrong+=1
 
         if answer20 == queryset.answer20:
-            score+=4
+            
             correct+=1
         elif answer20 is None or answer20 == "":
             not_attempted+=1
         else:
-            score-=1
             wrong+=1
-        print(answer)
-        print(queryset,score,correct,wrong,answer,answer11,answer2,answer20)
+        score= correct *4 - wrong
         entry=Result(post=queryset,result_of=request.user,wrong=wrong,correct=correct,not_attempted=not_attempted,score=score)
         entry.save()
+        messages.success(request,'Response Recorded!')
         return render(request,'index/result.html',{'queryset':queryset})
+        #return HttpResponseRedirect(reverse('index:'))
     return render(request,'index/quiz.html',{'queryset':queryset})
